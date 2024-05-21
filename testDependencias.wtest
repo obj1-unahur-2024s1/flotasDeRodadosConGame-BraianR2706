@@ -1,0 +1,133 @@
+import Autos.*
+import Dependencia.*
+
+const deportes = new Dependencia(empleados = 45)
+const cultura = new Dependencia(empleados = 31)
+
+
+const cachito = new ChevroletCorsa(color = rojo)
+const corsaAzul = new ChevroletCorsa(color = azul)
+const corsaVerde = new ChevroletCorsa(color = verde)
+const kwidDeportesT1 = new RenaultKwid(tieneTanqueC = true)
+const autoEsp = new AutoEspecial(capacidad = 5, velocidadMax = 160, peso = 1200, color = beige)
+
+
+const kwidCulturaT1 = new RenaultKwid(tieneTanqueC = true)
+const kwidCulturaT2 = new RenaultKwid(tieneTanqueC = true)
+const kwidCulturaG1 = new RenaultKwid(tieneTanqueC = false)
+const traficDeportes = new Trafic(interior = interiorPopular, motor = motorBaraton)
+
+//	deportes.agregarRodado(cachito)
+//	deportes.agregarRodado(corsaAzul)
+//	deportes.agregarRodado(corsaVerde)
+//	deportes.agregarRodado(kwidDeportesT1)
+//	deportes.agregarRodado(autoEsp)
+
+//	cultura.agregarRodado(kwidCulturaT1)
+//	cultura.agregarRodado(kwidCulturaT2)
+//	cultura.agregarRodado(kwidCulturaG1)
+//	cultura.agregarRodado(traficDeportes)
+
+test "peso Total flota de Deportes"{
+	deportes.agregarRodado(cachito)
+	deportes.agregarRodado(corsaAzul)
+	deportes.agregarRodado(corsaVerde)
+	deportes.agregarRodado(kwidDeportesT1)
+	deportes.agregarRodado(autoEsp)
+	assert.equals(6450, deportes.pesoTotalFlota())
+}
+
+test "Peso Total flota de Cultura"{
+	cultura.agregarRodado(cachito)
+	cultura.agregarRodado(kwidCulturaT1)
+	cultura.agregarRodado(kwidCulturaT2)
+	cultura.agregarRodado(kwidCulturaG1)
+	cultura.agregarRodado(traficDeportes)
+	assert.equals(14700 , cultura.pesoTotalFlota())
+}
+
+test "Deportes esta bien equipada"{
+	deportes.agregarRodado(cachito)
+	deportes.agregarRodado(corsaAzul)
+	deportes.agregarRodado(corsaVerde)
+	deportes.agregarRodado(kwidDeportesT1)
+	deportes.agregarRodado(autoEsp)
+	assert.that(deportes.estaBienEquipada())
+}
+
+test "Cultura NO esta bien equipada"{
+	cultura.agregarRodado(cachito)
+	cultura.agregarRodado(kwidCulturaT1)
+	cultura.agregarRodado(kwidCulturaT2)
+	cultura.agregarRodado(kwidCulturaG1)
+	cultura.agregarRodado(traficDeportes)
+	assert.that(not(cultura.estaBienEquipada()))
+}
+
+test "Capacidad total de color Azul"{
+	cultura.agregarRodado(cachito)
+	cultura.agregarRodado(kwidCulturaT1)
+	cultura.agregarRodado(kwidCulturaT2)
+	cultura.agregarRodado(kwidCulturaG1)
+	cultura.agregarRodado(traficDeportes)
+	deportes.agregarRodado(cachito)
+	deportes.agregarRodado(corsaAzul)
+	deportes.agregarRodado(corsaVerde)
+	deportes.agregarRodado(kwidDeportesT1)
+	deportes.agregarRodado(autoEsp)
+	assert.equals(deportes.capacidadTotalEnColor(azul) + cultura.capacidadTotalEnColor(azul), 17)
+}
+
+test "color del rodado mas rapido cultura"{
+	cultura.agregarRodado(cachito)
+	cultura.agregarRodado(kwidCulturaT1)
+	cultura.agregarRodado(kwidCulturaT2)
+	cultura.agregarRodado(kwidCulturaG1)
+	cultura.agregarRodado(traficDeportes)
+	assert.equals(rojo, cultura.colorDelRodadoMasRapido())
+}
+
+test "color del rodado mas rapido Deportes"{
+	deportes.agregarRodado(cachito)
+	deportes.agregarRodado(corsaAzul)
+	deportes.agregarRodado(corsaVerde)
+	deportes.agregarRodado(kwidDeportesT1)
+	deportes.agregarRodado(autoEsp)
+	assert.equals(deportes.colorDelRodadoMasRapido(), beige)
+}
+
+test "cultura NO es grande"{
+	cultura.agregarRodado(cachito)
+	cultura.agregarRodado(kwidCulturaT1)
+	cultura.agregarRodado(kwidCulturaT2)
+	cultura.agregarRodado(kwidCulturaG1)
+	cultura.agregarRodado(traficDeportes)
+	assert.that(not(cultura.esGrande()))
+}
+
+test "deportes es grande"{
+	deportes.agregarRodado(cachito)
+	deportes.agregarRodado(corsaAzul)
+	deportes.agregarRodado(corsaVerde)
+	deportes.agregarRodado(kwidDeportesT1)
+	deportes.agregarRodado(autoEsp)
+	assert.that(deportes.esGrande())
+}
+
+test "capacidad Faltante deportes"{
+	deportes.agregarRodado(cachito)
+	deportes.agregarRodado(corsaAzul)
+	deportes.agregarRodado(corsaVerde)
+	deportes.agregarRodado(kwidDeportesT1)
+	deportes.agregarRodado(autoEsp)
+	assert.equals(deportes.capacidadFaltante(), 25)
+}
+
+test "capacidad Faltante cultura"{
+	cultura.agregarRodado(cachito)
+	cultura.agregarRodado(kwidCulturaT1)
+	cultura.agregarRodado(kwidCulturaT2)
+	cultura.agregarRodado(kwidCulturaG1)
+	cultura.agregarRodado(traficDeportes)
+	assert.equals(cultura.capacidadFaltante(), 5)
+}
